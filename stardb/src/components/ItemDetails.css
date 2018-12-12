@@ -3,9 +3,11 @@
     margin-top: 1rem;
     flex-direction: row;
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 .person-details .person-image {
+    box-sizing: border-box;
     width: 30%;
     height: 30%;
     border-radius: 10px;
@@ -13,8 +15,18 @@
 
 .person-details .list-group-item {
     padding: .25rem;
+    
 }
 
 .person-details .list-group-item .term {
     margin-right: .5rem;
+    
+}
+.person-details button{
+    background-color: rgb(250, 250, 250, 0.15);
+    font-size: 15px;
+}
+.person-details button:hover{
+    background-color: rgb(250, 250, 250, 0.3);
+    color: #fff;
 }
