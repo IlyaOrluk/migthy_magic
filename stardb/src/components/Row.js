@@ -1,8 +1,10 @@
 import React from 'react';
+import ErrorBoundry from './ErrorBoundry';
 
     const Row = ({ left, right }) => {
         return (
-            <div className="row mb2">
+            <ErrorBoundry>
+                <div className="row mb2">
                         <div className="col-md-6">
                             { left }
                         </div>
@@ -10,6 +12,8 @@ import React from 'react';
                             { right }
                         </div>
                     </div>
+            </ErrorBoundry>
+            
         )
     }
 

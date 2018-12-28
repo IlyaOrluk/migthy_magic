@@ -1,32 +1,14 @@
 import React from 'react';
 import ItemList from './ItemList';
 import ItemDetails from './ItemDetails';
-import Error from './Error';
+import ErrorBoundry from './ErrorBoundry';
 import SwapiService from '../services/SwapiService';
 import Row from './Row';
 
 
 
-class ErrorBoundry extends React.Component {
-    state = {
-        hasError: false
-    };
-    componentDidCatch() {
 
-        this.setState({
-            hasError: true
-        });
-    };
 
-    render() {
-
-        if (this.state.hasError) {
-            return <Error />
-        }
-
-        return this.props.children;
-    }
-}
 
 export default class PeoplePage extends React.Component {
     
@@ -80,7 +62,7 @@ export default class PeoplePage extends React.Component {
         );
 
         return (
-            <Row left={itemList} right={personDetails}/>
+            <Row left={itemList} right={itemList}/>
         )
     }
 }
