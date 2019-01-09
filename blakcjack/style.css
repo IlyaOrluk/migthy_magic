@@ -60,8 +60,11 @@ div {
     position: absolute;
     bottom: 0%;
     border-radius: 5px 5px 0 0;
+    border: 1px solid aliceblue;
+    border-bottom: none;
     text-transform: uppercase;
     cursor: pointer;
+    transition: 1s;
 }
 .more {
     left: 30%;
@@ -76,7 +79,8 @@ i {
     top: 5%;
     left: 2%;
     color: aliceblue;
-    font-size: 50px;
+    font-size: 80px;
+    opacity: .5;
 }
 .player_score {
     color: aliceblue;

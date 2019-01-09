@@ -32,6 +32,8 @@ let arr = [6,7,8,9,10,2,3,4,11],
             playerScore.innerText = `Your score: 0`;
             players.one = 0;
             players.two = 0;
+            players.compCards = 0;
+            players.playerCards = 0;
 
     },
     
@@ -62,17 +64,17 @@ let openCompCard = () => {
     CompCard.appendChild(CompBack);
     CompBack.innerText = arr[CompRandomCard];
 
-    // if (CompRandomCard === 2) {
-    //     CompBack.innerText = 'J';
-    // } else if (CompRandomCard === 3) {
-    //     CompBack.innerText = 'Q';
-    // } else if (CompRandomCard === 4) {
-    //     CompBack.innerText = 'K';
-    // } else if (CompRandomCard === 11) {
-    //     CompBack.innerText = 'A';
-    // } else {
-    //     CompBack.innerText = arr[CompRandomCard];
-    // }
+    if (CompRandomCard === 5) {
+        CompBack.innerText = 'J';
+    } else if (CompRandomCard === 6) {
+        CompBack.innerText = 'Q';
+    } else if (CompRandomCard === 7) {
+        CompBack.innerText = 'K';
+    } else if (CompRandomCard === 8) {
+        CompBack.innerText = 'A';
+    } else {
+        CompBack.innerText = arr[CompRandomCard];
+    }
     
     
     
@@ -114,17 +116,17 @@ let openPlayerCard = () => {
     playerBack.classList.add('back');
     playerCard.appendChild(playerBack);
 
-    // if (playerRandomCard == 2) {
-    //     playerBack.innerText = 'J';
-    // } else if (playerRandomCard == 3) {
-    //     playerBack.innerText = 'Q';
-    // } else if (playerRandomCard == 4) {
-    //     playerBack.innerText = 'K';
-    // } else if (playerRandomCard == 11) {
-    //     playerBack.innerText = 'A';
-    // } else {
+    if (playerRandomCard == 5) {
+        playerBack.innerText = 'J';
+    } else if (playerRandomCard == 6) {
+        playerBack.innerText = 'Q';
+    } else if (playerRandomCard == 7) {
+        playerBack.innerText = 'K';
+    } else if (playerRandomCard == 8) {
+        playerBack.innerText = 'A';
+    } else {
         playerBack.innerText = arr[playerRandomCard];
-    // }
+    }
 
     let rotateCard = () =>{
         
