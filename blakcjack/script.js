@@ -1,7 +1,7 @@
 let box = document.querySelector('.card'),
     playerScore = document.querySelector('.player_score'),
-    compScore = document.querySelector('.comp_score');
-let down = 6, move = 42, rotate = 0;
+    compScore = document.querySelector('.comp_score'),
+    down = 6, move = 42, rotate = 0;
 
 box.style.left = `${move}%`;
 box.style.top = `${down}%`;
@@ -16,7 +16,8 @@ let more = document.querySelector('.more'),
         playerCards: 0,
         compCards: 0,
         compOpen: true,
-        suitId: [1,2,3,4]
+        suitId: [1,2,3,4],
+        repeatCard: []
     },
 
     restart = () => {
@@ -29,6 +30,7 @@ let more = document.querySelector('.more'),
             players.two = 0;
             players.compCards = 0;
             players.playerCards = 0;
+            players.repeatCard = [];
 
     },
     
@@ -56,7 +58,6 @@ let more = document.querySelector('.more'),
             nameCardReverse.classList.add('name_card_reverse');
 
         let cardSuit = () => {
-            randomSuit = Math.floor( Math.random() * 4 ) + 1;
             suit.src = `${randomSuit}.png`;
             suitReverse.src = `${randomSuit}.png`;
             suitCenter.src = `${randomSuit}.png`;
@@ -70,26 +71,73 @@ let more = document.querySelector('.more'),
         if (randomCard === 5) {
             nameCard.innerText = 'J';
             nameCardReverse.innerText = 'J';
+            players.repeatCard.push(`J-${randomSuit}`);
             cardSuit();
+            
         } else if (randomCard === 6) {
             nameCard.innerText = 'Q';
             nameCardReverse.innerText = 'Q';
+            players.repeatCard.push(`Q-${randomSuit}`);
             cardSuit();
         } else if (randomCard === 7) {
             nameCard.innerText = 'K';
             nameCardReverse.innerText = 'K';
+            players.repeatCard.push(`K-${randomSuit}`);
             cardSuit();
         } else if (randomCard === 8) {
             nameCard.innerText = 'A';
             nameCardReverse.innerText = 'A';
+            players.repeatCard.push(`A-${randomSuit}`);
             cardSuit();
         } else {
             nameCard.innerText = arr[randomCard];
             nameCardReverse.innerText = arr[randomCard];
+            players.repeatCard.push(`${randomCard}-${randomSuit}`);
             cardSuit();
         }
-
-    }
+        console.log(players.repeatCard);
+    },
+    getWinner = () => {
+        if(players.two > 21 && players.one > 21){
+            setTimeout(alert('DRAW!=)'), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.two == 21 && players.one == 21){
+            setTimeout(alert('DRAW!=)'), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.one > 21){
+            setTimeout(alert('You lose, Comp score: ' + players.two), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.two > 21){
+            setTimeout(alert('You WIN!, Comp score: ' + players.two), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.one == 21) {
+            setTimeout(alert('21! You WIN!, Comp score: ' + players.two), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.two == 21) {
+            setTimeout(alert('Comp WIN!, Comp score: ' + players.two + '!'), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.two > players.one){
+            setTimeout(alert('Comp WIN!, Comp score: ' + players.two), 1000);
+            setTimeout(restart, 1000);
+        } else if(players.two < players.one){
+            setTimeout(alert('You WIN!, Comp score: ' + players.two), 1000);
+            setTimeout(restart, 1000);
+        }  else if(players.two == players.one){
+            setTimeout(alert('DRAW! :)'), 1000);
+            setTimeout(restart, 1000);
+        }
+    },
+    
+    openComp = () => {
+                players.compOpen = true;
+                CompRandomCard = Math.floor( Math.random() * 9 );
+                openCompCard();
+                players.two += arr[CompRandomCard];
+                if (players.two > 18) {
+                    clearInterval(autoOpen);
+                    setTimeout(getWinner, 1000);
+                }
+    };
 
     
 
@@ -102,6 +150,7 @@ let CompCard = document.createElement('div');
         CompCard = document.createElement('div');
         CompFront = document.createElement('span');
         CompBack = document.createElement('span');
+        CompRandomSuit = Math.floor( Math.random() * 4 ) + 1;
         newCard(CompCard, CompFront);
         
         CompBack.classList.add('back');
@@ -141,6 +190,7 @@ let playerCard = document.createElement('div');
         playerCard = document.createElement('div');
         playerFront = document.createElement('span');
         playerBack = document.createElement('span');
+        playerRandomSuit = Math.floor( Math.random() * 4 ) + 1;
         newCard(playerCard, playerFront);
         playerBack.classList.add('back');
         playerCard.appendChild(playerBack);
@@ -165,15 +215,14 @@ let playerCard = document.createElement('div');
 };
 
 
-let CompRandomCard = Math.floor( Math.random() * 9 );
-let playerRandomCard = Math.floor( Math.random() * 9 );
+let CompRandomCard = Math.floor( Math.random() * 9 ),
+    playerRandomCard = Math.floor( Math.random() * 9 );
 
 //MORE
 more.addEventListener('click', () => {
     CompRandomCard = Math.floor( Math.random() * 9 );
     playerRandomCard = Math.floor( Math.random() * 9 );
     players.one += arr[playerRandomCard];
-    console.log('P1score: ' + players.one);
     playerScore.innerText = `Your score: ${players.one}`;
 
     setTimeout(openPlayerCard, 100);
@@ -181,57 +230,14 @@ more.addEventListener('click', () => {
     if (players.two <= 17) {
         players.two += arr[CompRandomCard];
         setTimeout(openCompCard, 300);
-        console.log('P2score: ' + players.two);
     } else {
         return '';
     }
+    console.log(players.repeatCard);
 });
 
-
 //Open
-let getWinner = () => {
-    if(players.two > 21 && players.one > 21){
-        setTimeout(alert('DRAW!=)'), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.two == 21 && players.one == 21){
-        setTimeout(alert('DRAW!=)'), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.one > 21){
-        setTimeout(alert('You lose, Comp score: ' + players.two), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.two > 21){
-        setTimeout(alert('You WIN!, Comp score: ' + players.two), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.one == 21) {
-        setTimeout(alert('21! You WIN!, Comp score: ' + players.two), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.two == 21) {
-        setTimeout(alert('Comp WIN!, Comp score: ' + players.two + '!'), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.two > players.one){
-        setTimeout(alert('Comp WIN!, Comp score: ' + players.two), 1000);
-        setTimeout(restart, 1000);
-    } else if(players.two < players.one){
-        setTimeout(alert('You WIN!, Comp score: ' + players.two), 1000);
-        setTimeout(restart, 1000);
-    }  else if(players.two == players.one){
-        setTimeout(alert('DRAW! :)'), 1000);
-        setTimeout(restart, 1000);
-    }
-};
-
-let openComp = () => {
-            players.compOpen = true;
-            CompRandomCard = Math.floor( Math.random() * 9 );
-            openCompCard();
-            players.two += arr[CompRandomCard];
-            console.log('P2score: ' + players.two);
-            if (players.two > 18) {
-                clearInterval(autoOpen);
-                setTimeout(getWinner, 1000);
-            }
-},
-    autoOpen = null;
+let autoOpen = null;
 open.addEventListener('click', () => { 
     if (players.two < 18){
     autoOpen = setInterval(openComp, 1000);
@@ -242,3 +248,11 @@ open.addEventListener('click', () => {
 });
 
 
+// var peopleList = ['dodo', 'djorhe', 'genry'];
+// let changePerson = () => {
+//   let randomPerson = Math.floor(Math.random() * peopleList.length);
+//   alert(randomPerson);
+//   peopleList.splice(randomPerson, 1);
+//   alert(peopleList);
+// };
+// changePerson();
