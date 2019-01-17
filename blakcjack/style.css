@@ -82,10 +82,24 @@ i {
     font-size: 80px;
     opacity: .5;
 }
-.player_score {
+.player_score, .comp_score {
     color: aliceblue;
     font-size: 20px;
     text-transform: uppercase;
+    background: rgba(0, 0, 0, .5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+.player_score {
+    position: absolute;
+    top: 5%;
+    left: 20%;
+}
+.comp_score {
+    position: absolute;
+    top: 5%;
+    left: 60%;
 }
 .suit {
     position: absolute;
