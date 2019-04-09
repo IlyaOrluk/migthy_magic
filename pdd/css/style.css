@@ -19,6 +19,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center; 
+	height: 90vh;
 }
 h1 {
 	font-family: Franklin Gothic Demi C;
@@ -31,6 +32,7 @@ h1 {
 	display: flex;
 	align-items: center;
 	width: 100%;
+	margin-bottom: 3vh;
 }
 .title {
 	color: #000;
