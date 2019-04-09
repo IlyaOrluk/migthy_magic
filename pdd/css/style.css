@@ -1,0 +1,58 @@
+@font-face {
+	font-family: Franklin Gothic Demi C;
+	src: url("../fonts/FranklinGothicDemiC.otf") format("opentype");
+}
+@font-face {
+	font-family: Franklin Gothic Book Cond OSC;
+	src: url("../fonts/FranklinGothicBookCondOSC.otf") format("opentype");
+}
+@font-face {
+	font-family: Franklin Gothic Heavy C;
+	src: url("../fonts/FranklinGothicHeavyC.otf") format("opentype");
+}
+body {
+	padding: 0;
+	margin: 0;
+}
+#first {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; 
+}
+h1 {
+	font-family: Franklin Gothic Demi C;
+	color: #e30614;
+	font-size: 150px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.title-box {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+.title {
+	color: #000;
+	font-family: Franklin Gothic Book Cond OSC;
+	font-size: 120px;
+	font-weight: 400;
+	margin-left: 83px;
+}
+.number {
+	position: absolute;
+	margin-left: 7vh;
+	color: #fff;
+	font-family: Franklin Gothic Heavy C;
+	font-size: 180px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.red-arrow {
+	background: url(../images/red-arrow.png);
+	width: 376px;
+	height: 222px;
+}
+.video {
+	margin: 3vh;
+}
